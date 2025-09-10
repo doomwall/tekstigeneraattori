@@ -53,7 +53,6 @@ class Trie:
         found_word = random.choices(result_find[0], weights=result_find[1], k=1)[0]
         result += found_word
         result += " "
-        print(f"found word: {found_word}")
         amount -= 1
         if amount > 0:
             next_pred = self.predict([found_word], amount)
@@ -63,11 +62,17 @@ class Trie:
 
 
 if __name__ == "__main__":
-    trie = Trie(n=3)
+    trie = Trie(n=2)
     trie.insert_helper(["minä", "menen", "kouluun", "nyt", "heti"])
     trie.insert_helper(["minä", "menen", "kotiin", "huomenna", "ehkä"])
-    print(trie.root.children["minä"])
+    print(trie.root.children)
 
     prediction = trie.predict(["minä"], 10)
     print(prediction)
 
+    data = ['The', 'inhabitants', 'are', 'strong', 'and', 'hardy', 'with', 'bright', 'intelligent', 'faces', 'high', 'cheek', 'bones', 'yellow']
+
+    trie.insert_helper(data)
+    print(trie.root.children)
+    prediction = trie.predict(["sleep"], 10)
+    print(prediction)
