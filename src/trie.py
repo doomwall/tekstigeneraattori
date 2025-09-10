@@ -8,7 +8,6 @@ class Node:
 
     def __repr__(self):
         return (f"Node(freq={self.frequency}, "
-                f"isTerminal={self.isTerminal}, "
                 f"children={list(self.children.keys())})")
 
 
@@ -38,9 +37,12 @@ class Trie:
         freqs = []
         current = self.root
         for thing in input:
+            print(f"THING: {thing}")
             if thing not in current.children:
                 return None
             current = current.children[thing]
+
+        print(f"CHILDREN: {current.children}")
         if not current.children:
             return None
         for i, p in current.children.items():
@@ -48,35 +50,35 @@ class Trie:
             freqs.append(p.frequency)
         return (things, freqs)
     
+
     def predict(self, thing, amount):
-        # ennustaa tulevia mahdollisia merkkejä tai sanoja käyttäen random.choices
-        result = ""
-        result_find = self.find(thing)
-        if result_find == None:
-            return None
-        found_word = random.choices(result_find[0], weights=result_find[1], k=1)[0]
-        result += found_word
-        result += " "
-        amount -= 1
-        if amount > 0:
-            next_pred = self.predict([found_word], amount)
-            if next_pred:
-                result += next_pred
+        result = thing
+
+        while amount > 0:
+            used_arg = result[-(self.n - 1):]
+            result_find = self.find(used_arg)
+            print(f"RESULT FIND: {result_find}")
+            if result_find == None:
+                amount -= 1
+                continue
+            found_word = random.choices(result_find[0], weights=result_find[1], k=1)[0]
+            result.append(found_word)
+            amount -= 1
+
         return result
+            
+
 
 
 if __name__ == "__main__":
-    trie = Trie(n=2)
+    trie = Trie(n=3)
     trie.insert_helper(["minä", "menen", "kouluun", "nyt", "heti"])
     trie.insert_helper(["minä", "menen", "kotiin", "huomenna", "ehkä"])
-    print(trie.root.children)
+    trie.insert_helper(["ehkä", "menen", "sittenkin", "huomenna", "kotiin"])
 
-    prediction = trie.predict(["minä"], 10)
-    print(prediction)
+    #prediction = trie.predict(["minä"], 10)
+    #print(prediction)
 
-    data = ['The', 'inhabitants', 'are', 'strong', 'and', 'hardy', 'with', 'bright', 'intelligent', 'faces', 'high', 'cheek', 'bones', 'yellow']
+    x = trie.predict(["minä"], 10)
 
-    trie.insert_helper(data)
-    print(trie.root.children)
-    prediction = trie.predict(["strong"], 10)
-    print(prediction)
+    print(x)

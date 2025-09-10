@@ -1,7 +1,7 @@
 from data_parser import Data_parser
 from trie import Trie
 
-trie = Trie(n=2)
+trie = Trie(n=3)
 pars = Data_parser()
 
 source = pars.open_file("kalevala.txt")
