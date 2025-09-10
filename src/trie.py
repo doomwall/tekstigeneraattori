@@ -15,9 +15,10 @@ class Node:
 class Trie:
     def __init__(self, n):
         self.root = Node()
-        self.n = n
+        self.n = n  # Markovin asteen määrä 
 
     def insert(self, data: str):
+        # funktio arvojen lisäämiselle Trie-puuhun
         current = self.root
         for i in data:
             if i not in current.children:
@@ -26,11 +27,13 @@ class Trie:
             current.frequency += 1
 
     def insert_helper(self, data):
+        # funktio, joka pilkkoo lisättävän materiaalin puuhun n arvon mukaan
         for i in range(len(data) - self.n + 1):
             ngram = data[i:i+self.n]
             self.insert(ngram)
 
     def find(self, input):
+        # etsii Trie puusta solmun ja palauttaa sen lapset ja niiden yleisyyden
         things = []
         freqs = []
         current = self.root
@@ -46,6 +49,7 @@ class Trie:
         return (things, freqs)
     
     def predict(self, thing, amount):
+        # ennustaa tulevia mahdollisia merkkejä tai sanoja käyttäen random.choices
         result = ""
         result_find = self.find(thing)
         if result_find == None:
@@ -74,5 +78,5 @@ if __name__ == "__main__":
 
     trie.insert_helper(data)
     print(trie.root.children)
-    prediction = trie.predict(["sleep"], 10)
+    prediction = trie.predict(["strong"], 10)
     print(prediction)

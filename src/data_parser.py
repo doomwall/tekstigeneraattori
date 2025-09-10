@@ -1,6 +1,7 @@
 from pathlib import Path
 import re
 
+# Tämä luokka pilkkoo datan hyväksyttävään muotoon Trie puuta varten
 
 class Data_parser:
     def __init__(self):
