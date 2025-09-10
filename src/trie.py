@@ -37,12 +37,10 @@ class Trie:
         freqs = []
         current = self.root
         for thing in input:
-            print(f"THING: {thing}")
             if thing not in current.children:
                 return None
             current = current.children[thing]
 
-        print(f"CHILDREN: {current.children}")
         if not current.children:
             return None
         for i, p in current.children.items():
@@ -57,7 +55,6 @@ class Trie:
         while amount > 0:
             used_arg = result[-(self.n - 1):]
             result_find = self.find(used_arg)
-            print(f"RESULT FIND: {result_find}")
             if result_find == None:
                 amount -= 1
                 continue
