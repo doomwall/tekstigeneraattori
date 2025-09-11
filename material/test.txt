@@ -1,0 +1,4 @@
+%
+
+This is a sample text for the parser. 
+Parser needs to open this file without problems!

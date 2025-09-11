@@ -41,7 +41,6 @@ class Trie:
                 return None
             current = current.children[thing]
 
-        # palauttaa random sanan, jos solmun alla ei ole enempää sanoja
         if not current.children:
             return None
         for i, p in current.children.items():
@@ -51,6 +50,10 @@ class Trie:
     
 
     def predict(self, thing, amount):
+        # etsii solmuista seuraavia sanoja, joita käyttää lauseessa
+        # thing = syötettävä arvo, millä etsitään
+        # amount = montako sanaa/merkkiä tuotetaan
+        
         result = thing
 
         while amount > 0:

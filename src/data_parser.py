@@ -11,7 +11,6 @@ class Data_parser:
         return re.split(r'\W+', data)
 
     def open_file(self, filename):
-        print(str(self.dirname) + "/material/" + filename)
         f = open(str(self.dirname) + "/material/" + filename, encoding="utf-8")
         return f.read()
     
@@ -26,6 +25,9 @@ class Data_parser:
 
 
 if __name__ == "__main__":
-    #d = Data_parser()
-    #x = d.open_file("kalevala.txt")
+    """d = Data_parser()
+    x = d.open_file("kalevala.txt")
+    y = d.parser(data)
+    print(y)"""
+    
     pass
