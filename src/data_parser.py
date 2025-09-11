@@ -26,16 +26,6 @@ class Data_parser:
 
 
 if __name__ == "__main__":
-    d = Data_parser()
-    x = d.open_file("kalevala.txt")
-
-    print(x)
-
-    y = d.parser(x)
-
-    print(y)
-
-    p = d.collect_from_list(y)
-
-    print(p)
-
+    #d = Data_parser()
+    #x = d.open_file("kalevala.txt")
+    pass

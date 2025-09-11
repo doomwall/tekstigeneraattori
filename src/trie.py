@@ -69,7 +69,7 @@ class Trie:
 
 
 if __name__ == "__main__":
-    trie = Trie(n=1)
+    '''trie = Trie(n=1)
     trie.insert_helper(["minä", "menen", "kouluun", "nyt", "heti"])
     trie.insert_helper(["minä", "menen", "kotiin", "huomenna", "ehkä"])
     trie.insert_helper(["ehkä", "menen", "sittenkin", "huomenna", "kotiin"])
@@ -81,4 +81,6 @@ if __name__ == "__main__":
 
     x = trie.predict(["minä"], 10)
 
-    print(x)
+    print(x)'''
+
+    pass
