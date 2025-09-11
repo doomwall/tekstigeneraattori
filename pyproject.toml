@@ -2,7 +2,7 @@
 name = "tekstigeneraattori"
 version = "0.1.0"
 description = "Aineopintojen harjoitustyö: Algoritmit ja tekoäly"
-authors = ["doomwall <tuomo.valkila@gmail.com>"]
+authors = ["doomwall <tuomo.valkila@helsinki.fi>"]
 readme = "README.md"
 
 [tool.poetry.dependencies]
@@ -12,7 +12,12 @@ python = "^3.10"
 [tool.poetry.group.dev.dependencies]
 pytest = "^8.4.2"
 coverage = "^7.10.6"
+taskipy = "^1.14.1"
 
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
+
+[tool.taskipy.tasks]
+tests = "coverage run --branch -m pytest src"
+coverage = "coverage report -m"
