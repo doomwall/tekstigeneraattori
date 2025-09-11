@@ -41,6 +41,7 @@ class Trie:
                 return None
             current = current.children[thing]
 
+        # palauttaa random sanan, jos solmun alla ei ole enempää sanoja
         if not current.children:
             return None
         for i, p in current.children.items():
@@ -68,13 +69,15 @@ class Trie:
 
 
 if __name__ == "__main__":
-    trie = Trie(n=3)
+    trie = Trie(n=1)
     trie.insert_helper(["minä", "menen", "kouluun", "nyt", "heti"])
     trie.insert_helper(["minä", "menen", "kotiin", "huomenna", "ehkä"])
     trie.insert_helper(["ehkä", "menen", "sittenkin", "huomenna", "kotiin"])
 
-    #prediction = trie.predict(["minä"], 10)
-    #print(prediction)
+    print(trie.root.children)
+
+    prediction = trie.predict(["minä"], 10)
+    print(prediction)
 
     x = trie.predict(["minä"], 10)
 

@@ -11,9 +11,17 @@ class Data_parser:
         return re.split(r'\W+', data)
 
     def open_file(self, filename):
-        print(str(self.dirname) + "\\material\\" + filename)
-        f = open(str(self.dirname) + "\\material\\" + filename, encoding="utf-8")
+        print(str(self.dirname) + "/material/" + filename)
+        f = open(str(self.dirname) + "/material/" + filename, encoding="utf-8")
         return f.read()
+    
+    def collect_from_list(self, data):
+        result = ""
+        for i in data:
+            result += i
+            result += " "
+
+        return result
 
 
 
@@ -26,4 +34,8 @@ if __name__ == "__main__":
     y = d.parser(x)
 
     print(y)
+
+    p = d.collect_from_list(y)
+
+    print(p)
 
