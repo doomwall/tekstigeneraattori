@@ -13,7 +13,7 @@ cd tekstigeneraattori
 
 Asenna tarvittavat paketit komennolla: 
 ```
-poetry install
+poetry install --no-root
 ```
 
 Käynnistä virtual environment venv:
@@ -24,4 +24,10 @@ poetry shell
 Ohjelma käynnistyy komennolla:
 ```
 python src/main.py
+```
+
+Testit voi ajaa venvin sisällä komennoilla:
+```
+poetry run task tests
+poetry run task coverage
 ```
