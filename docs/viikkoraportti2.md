@@ -7,4 +7,6 @@ Opin Trie-rakenteesta ja Markovin ketjusta ja sen toteutuksesta python koodilla.
 Vielä minulle on epäselvää miten lopetan lauseet ja miten määrittelen aloitus sanat lauseille. Nodelle on määritelty arvo isTerminal, eli onko Node lauseen lopetus. Tätä ei kuitenkaan vielä käytetä ohjelman suorituksessa. Tätä lähden selvittämään ensi viikolla. Lisäksi haluan ohjelmalle lisää luettavaa dataa ja muuntaa ohjelman myös muotoon, että se osaa lukea sanoista merkit, eikä lauseista sanoja. 
 
 Käytetty aika: 15h
+
+
 Tekoälyä käytetty Trie-tietorakenteen ymmärtämiseen, mutta tekoälyä ei ole käytetty koodin luomiseen. 
