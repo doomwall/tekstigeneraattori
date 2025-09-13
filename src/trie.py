@@ -45,7 +45,6 @@ class Trie:
             # jos solmulla ei ole enempää lapsia, niin palautetaan random sana
             x = list(self.root.children.keys())
             word = random.choice(x)
-            print((word, [1]))
             return ([word], [1])
         
         for i, p in current.children.items():
