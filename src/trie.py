@@ -41,8 +41,13 @@ class Trie:
                 return None
             current = current.children[thing]
 
-        if not current.children:
-            return None
+        if not current.children: 
+            # jos solmulla ei ole enempää lapsia, niin palautetaan random sana
+            x = list(self.root.children.keys())
+            word = random.choice(x)
+            print((word, [1]))
+            return ([word], [1])
+        
         for i, p in current.children.items():
             things.append(i)
             freqs.append(p.frequency)
@@ -57,7 +62,7 @@ class Trie:
         result = thing
 
         while amount > 0:
-            used_arg = result[-(self.n - 1):]
+            used_arg = result[-(self.n - 1):] if self.n > 1 else []
             result_find = self.find(used_arg)
             if result_find == None:
                 amount -= 1
@@ -72,18 +77,14 @@ class Trie:
 
 
 if __name__ == "__main__":
-    '''trie = Trie(n=1)
+    """trie = Trie(n=1)
     trie.insert_helper(["minä", "menen", "kouluun", "nyt", "heti"])
     trie.insert_helper(["minä", "menen", "kotiin", "huomenna", "ehkä"])
     trie.insert_helper(["ehkä", "menen", "sittenkin", "huomenna", "kotiin"])
-
-    print(trie.root.children)
 
     prediction = trie.predict(["minä"], 10)
     print(prediction)
 
     x = trie.predict(["minä"], 10)
 
-    print(x)'''
-
-    pass
+    print(x)"""
