@@ -55,16 +55,17 @@ def kalevala():
     feed = pars.parser(source)
     trie.insert_helper(feed)
 
-    how_many_message = "How many words would you like to generate: "
+    how_many_message = "How many words shold I generate atleast?"
 
     while True:
-        word = inquirer.text(message="Give me a word (empty will close):").execute()
+        word = inquirer.text(message="Give me a starting word (empty will close):").execute()
         if word == "":
             break
 
         amount = how_many(how_many_message)
 
         prediction = trie.predict([word], int(amount))
+        print(prediction)
         collected = pars.collect_from_list(prediction)
 
         if len(prediction) == 1:
@@ -78,7 +79,7 @@ def dogs():
     pars = DataParser()
 
     trie = markov_order()
-    how_many_message = "How many letters should the name have:"
+    how_many_message = "How many letters atleast should the name have:"
 
     source = pars.open_file("dogs.txt")
     feed = pars.parser(source)
@@ -94,7 +95,8 @@ def dogs():
         amount = how_many(how_many_message)
 
         prediction = trie.predict([letter], int(amount))
-        collected = pars.collect_letters_from_list(prediction)
+        print(f"PREDICTION {prediction}")
+        collected = pars.collect_letters_from_list(prediction[0])
 
         if len(prediction) == 1:
             print("This letter was not found in the text")

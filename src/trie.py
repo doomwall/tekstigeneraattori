@@ -8,21 +8,30 @@ class Node:
 
     def __repr__(self):
         return (f"Node(freq={self.frequency}, "
-                f"children={list(self.children.keys())})")
+                f"children={list(self.children.keys())}, "
+                f"is_terminal={self.is_terminal})")
 
 
 class Trie:
     def __init__(self, n):
         self.root = Node()
         self.n = n  # Markovin asteen määrä
+        self.endings = [".", ",", "!", ";", "?"]
 
     def insert(self, data: str):
         # funktio arvojen lisäämiselle Trie-puuhun
         current = self.root
         for i in data:
             thing = i.lower()
+            terminal = i[-1] in self.endings
+
+            if terminal:
+                thing = thing[:-1]
+
             if thing not in current.children:
                 current.children[thing] = Node()
+                current.children[thing].is_terminal |= terminal
+            
             current = current.children[thing]
             current.frequency += 1
 
@@ -36,22 +45,24 @@ class Trie:
         # etsii Trie puusta solmun ja palauttaa sen lapset ja niiden yleisyyden
         things = []
         freqs = []
+        is_terminals = []
         current = self.root
-        for thing in data:
-            if thing not in current.children:
-                return None
-            current = current.children[thing]
+        for i in data:
+            if i not in current.children:
+                fallback = random.choice(list(self.root.children.items()))
+                return ([fallback[0]], [fallback[1].frequency], [fallback[1].is_terminal])
+            current = current.children[i]
 
         if not current.children:
             # jos solmulla ei ole enempää lapsia, niin palautetaan random sana
-            children = list(self.root.children.keys())
-            word = random.choice(children)
-            return ([word], [1])
+            fallback = random.choice(list(self.root.children.items()))
+            return ([fallback[0]], [fallback[1].frequency], [fallback[1].is_terminal])
 
         for i, p in current.children.items():
             things.append(i)
             freqs.append(p.frequency)
-        return (things, freqs)
+            is_terminals.append(p.is_terminal)
+        return (things, freqs, is_terminals)
 
 
     def predict(self, thing, amount):
@@ -60,32 +71,52 @@ class Trie:
         # amount = montako sanaa/merkkiä tuotetaan
 
         result = thing
+        booleans = [False]
         amount = amount - 1
 
-        while amount > 0:
+        while True:
             used_arg = result[-(self.n - 1):] if self.n > 1 else []
             result_find = self.find(used_arg)
             if result_find is None:
                 amount -= 1
                 continue
-            found_word = random.choices(result_find[0], weights=result_find[1], k=1)[0]
-            result.append(found_word)
+            # arvotaan sana joukosta sanoja
+            value = random.choices([i for i in range(0, len(result_find[0]))], weights=result_find[1], k=1)[0]
+            
+            result.append(result_find[0][value])
+            booleans.append(result_find[2][value])
             amount -= 1
 
-        return result
+            # jos määrä ylitetään, lopetetaan etsintä seuraavaan sanaan joka on lauseen päätös
+            if amount < 0 and result_find[2][value]:
+                break
+
+        return (result, booleans)
 
 
 
 
 if __name__ == "__main__":
-    trie = Trie(n=1)
-    trie.insert_helper(["minä", "menen", "kouluun", "nyt", "heti"])
-    trie.insert_helper(["minä", "menen", "kotiin", "huomenna", "ehkä"])
-    trie.insert_helper(["ehkä", "menen", "sittenkin", "huomenna", "kotiin"])
+    trie = Trie(n=2)
+    #trie.insert_helper(["minä;", "menen", "kouluun", "nyt", "heti"])
+    #trie.insert_helper(["minä", "menen.", "kotiin", "huomenna", "ehkä"])
+    #trie.insert_helper(["ehkä", "menen", "sittenkin;", "huomenna", "kotiin"])
 
-    prediction = trie.predict(["minä"], 10)
+    trie.insert_helper(["a", "i", "e.", "e", "o"])
+    trie.insert_helper(["a", "u", "e", "o", "o."])
+    trie.insert_helper(["a", "e"])
+    trie.insert_helper(["a", "i"])
+    trie.insert_helper(["a", "e"])
+    print(trie.root)
+    print(trie.root.children["e"])
+
+    prediction = trie.predict(["a"], 3)
     print(prediction)
 
-    x = trie.predict(["minä"], 10)
+    #x = trie.predict(["minä"], 10)
 
-    print(x)
+    #print(x)
+    
+    #print(trie.find(["menen"]))
+    
+
