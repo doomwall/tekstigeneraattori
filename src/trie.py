@@ -4,7 +4,7 @@ class Node:
     def __init__(self):
         self.children = {}
         self.frequency: int = 0
-        self.isTerminal: bool = False
+        self.is_terminal: bool = False
 
     def __repr__(self):
         return (f"Node(freq={self.frequency}, "
@@ -14,7 +14,7 @@ class Node:
 class Trie:
     def __init__(self, n):
         self.root = Node()
-        self.n = n  # Markovin asteen määrä 
+        self.n = n  # Markovin asteen määrä
 
     def insert(self, data: str):
         # funktio arvojen lisäämiselle Trie-puuhun
@@ -32,40 +32,40 @@ class Trie:
             ngram = data[i:i+self.n]
             self.insert(ngram)
 
-    def find(self, input):
+    def find(self, data):
         # etsii Trie puusta solmun ja palauttaa sen lapset ja niiden yleisyyden
         things = []
         freqs = []
         current = self.root
-        for thing in input:
+        for thing in data:
             if thing not in current.children:
                 return None
             current = current.children[thing]
 
-        if not current.children: 
+        if not current.children:
             # jos solmulla ei ole enempää lapsia, niin palautetaan random sana
-            x = list(self.root.children.keys())
-            word = random.choice(x)
+            children = list(self.root.children.keys())
+            word = random.choice(children)
             return ([word], [1])
-        
+
         for i, p in current.children.items():
             things.append(i)
             freqs.append(p.frequency)
         return (things, freqs)
-    
+
 
     def predict(self, thing, amount):
         # etsii solmuista seuraavia sanoja, joita käyttää lauseessa
         # thing = syötettävä arvo, millä etsitään
         # amount = montako sanaa/merkkiä tuotetaan
-        
+
         result = thing
         amount = amount - 1
 
         while amount > 0:
             used_arg = result[-(self.n - 1):] if self.n > 1 else []
             result_find = self.find(used_arg)
-            if result_find == None:
+            if result_find is None:
                 amount -= 1
                 continue
             found_word = random.choices(result_find[0], weights=result_find[1], k=1)[0]
@@ -73,12 +73,12 @@ class Trie:
             amount -= 1
 
         return result
-            
+
 
 
 
 if __name__ == "__main__":
-    """trie = Trie(n=1)
+    trie = Trie(n=1)
     trie.insert_helper(["minä", "menen", "kouluun", "nyt", "heti"])
     trie.insert_helper(["minä", "menen", "kotiin", "huomenna", "ehkä"])
     trie.insert_helper(["ehkä", "menen", "sittenkin", "huomenna", "kotiin"])
@@ -88,4 +88,4 @@ if __name__ == "__main__":
 
     x = trie.predict(["minä"], 10)
 
-    print(x)"""
+    print(x)

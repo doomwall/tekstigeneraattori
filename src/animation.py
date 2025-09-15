@@ -1,7 +1,7 @@
 import time
 import sys
 
-class Animate_text:
+class AnimateText:
     def __init__(self):
         pass
 
@@ -15,5 +15,5 @@ class Animate_text:
 
 
 if __name__ == "__main__":
-    a = Animate_text()
+    a = AnimateText()
     a.one_by_one("hello")

@@ -3,20 +3,21 @@ import re
 
 # Tämä luokka pilkkoo datan hyväksyttävään muotoon Trie puuta varten
 
-class Data_parser:
+class DataParser:
     def __init__(self):
         self.dirname = Path(__file__).resolve().parent.parent
 
     def parser(self, data):
         return re.split(r'\W+', data)
-    
+
     def word_to_chars(self, data):
         return list(data)
 
     def open_file(self, filename):
-        f = open(str(self.dirname) + "/material/" + filename, encoding="utf-8")
-        return f.read()
-    
+        path = str(self.dirname) + "/material/" + filename
+        with open(path, encoding="utf-8") as f:
+            return f.read()
+
     def collect_from_list(self, data):
         result = ""
         for i in data:
@@ -24,22 +25,16 @@ class Data_parser:
             result += " "
 
         return result
-    
-    def collect_letters_from_list(self, data):
-        result = ""
-        for i in data:
-            result += i
 
-        return result
+    def collect_letters_from_list(self, data):
+        return "".join(data)
 
 
 
 if __name__ == "__main__":
-    """d = Data_parser()
+    d = DataParser()
     x = d.open_file("kalevala.txt")
-    y = d.parser(data)
-    print(y)"""
-    
-    d = Data_parser()
+
+    d = DataParser()
     x = d.word_to_chars("hello")
     print(x)

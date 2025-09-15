@@ -1,9 +1,10 @@
-from data_parser import Data_parser
-from trie import Trie
-from animation import Animate_text
 from InquirerPy import inquirer # type: ignore
+from data_parser import DataParser
+from trie import Trie
+from animation import AnimateText
 
-ascii_art = """ _____     _        _   _                                       _   _             _
+
+ASCII_ART = r""" _____     _        _   _                                       _   _             _
 /__   \___| | _____| |_(_) __ _  ___ _ __   ___ _ __ __ _  __ _| |_| |_ ___  _ __(_)
   / /\/ _ \ |/ / __| __| |/ _` |/ _ \ '_ \ / _ \ '__/ _` |/ _` | __| __/ _ \| '__| |
  / / |  __/   <\__ \ |_| | (_| |  __/ | | |  __/ | | (_| | (_| | |_| || (_) | |  | |
@@ -13,10 +14,8 @@ ascii_art = """ _____     _        _   _                                       _
 
 def main():
     # pääohjelma
-    pars = Data_parser()
-    
 
-    print(ascii_art)
+    print(ASCII_ART)
     print("Welcome to tekstigeneraattori")
 
     while True:
@@ -41,41 +40,45 @@ def markov_order():
         try:
             trie = Trie(n=int(order))
             return trie
-        except:
+        except ValueError:
             print("Please give a number")
 
 def kalevala():
     # aloittaa ohjelman englannin kielisellä Kalevalalla
 
-    pars = Data_parser()
-    anim = Animate_text()
+    pars = DataParser()
+    anim = AnimateText()
 
     trie = markov_order()
 
     source = pars.open_file("kalevala.txt")
     feed = pars.parser(source)
     trie.insert_helper(feed)
+
+    how_many_message = "How many words would you like to generate: "
+
     while True:
-        word = inquirer.text(message="Give me a word: ").execute()
+        word = inquirer.text(message="Give me a word (empty will close):").execute()
         if word == "":
             break
 
-        amount = inquirer.text(message="How many words would you like to generate: ").execute()
+        amount = how_many(how_many_message)
 
         prediction = trie.predict([word], int(amount))
         collected = pars.collect_from_list(prediction)
 
         if len(prediction) == 1:
-            print(f"This word was not found in the text")
+            print("This word was not found in the text")
         else:
             anim.one_by_one(collected)
 
 def dogs():
     # aloittaa ohjelman koirien nimillä
 
-    pars = Data_parser()
+    pars = DataParser()
 
     trie = markov_order()
+    how_many_message = "How many letters should the name have:"
 
     source = pars.open_file("dogs.txt")
     feed = pars.parser(source)
@@ -84,19 +87,29 @@ def dogs():
         trie.insert_helper(char)
 
     while True:
-        letter = inquirer.text(message="Give me a letter: ").execute()
+        letter = inquirer.text(message="Give me a letter (empty will close):").execute()
         if letter == "":
             break
 
-        amount = inquirer.text(message="How long name would you like to generate: ").execute()
+        amount = how_many(how_many_message)
 
         prediction = trie.predict([letter], int(amount))
         collected = pars.collect_letters_from_list(prediction)
 
         if len(prediction) == 1:
-            print(f"This letter was not found in the text")
+            print("This letter was not found in the text")
         else:
             print(collected)
+            print("")
+
+
+def how_many(message):
+    while True:
+        try:
+            amount = inquirer.number(message=message).execute()
+            return int(amount)
+        except ValueError:
+            print("Only numbers are allowed.")
 
 
 if __name__ == "__main__":
