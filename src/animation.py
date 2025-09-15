@@ -6,6 +6,7 @@ class Animate_text:
         pass
 
     def one_by_one(self, text):
+        # tekee tekstille animaation, jolla se tulostetaan kirjain kerrallaan
         for letter in text:
             print(letter, end='')
             sys.stdout.flush()

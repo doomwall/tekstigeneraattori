@@ -24,6 +24,13 @@ class Data_parser:
             result += " "
 
         return result
+    
+    def collect_letters_from_list(self, data):
+        result = ""
+        for i in data:
+            result += i
+
+        return result
 
 
 

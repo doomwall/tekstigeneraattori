@@ -20,9 +20,10 @@ class Trie:
         # funktio arvojen lisäämiselle Trie-puuhun
         current = self.root
         for i in data:
-            if i not in current.children:
-                current.children[i] = Node()
-            current = current.children[i]
+            thing = i.lower()
+            if thing not in current.children:
+                current.children[thing] = Node()
+            current = current.children[thing]
             current.frequency += 1
 
     def insert_helper(self, data):
@@ -59,6 +60,7 @@ class Trie:
         # amount = montako sanaa/merkkiä tuotetaan
         
         result = thing
+        amount = amount - 1
 
         while amount > 0:
             used_arg = result[-(self.n - 1):] if self.n > 1 else []
