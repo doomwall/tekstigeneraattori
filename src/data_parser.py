@@ -9,6 +9,9 @@ class Data_parser:
 
     def parser(self, data):
         return re.split(r'\W+', data)
+    
+    def word_to_chars(self, data):
+        return list(data)
 
     def open_file(self, filename):
         f = open(str(self.dirname) + "/material/" + filename, encoding="utf-8")
@@ -30,4 +33,6 @@ if __name__ == "__main__":
     y = d.parser(data)
     print(y)"""
     
-    pass
+    d = Data_parser()
+    x = d.word_to_chars("hello")
+    print(x)
