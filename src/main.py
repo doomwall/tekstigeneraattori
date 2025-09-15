@@ -65,7 +65,6 @@ def kalevala():
         amount = how_many(how_many_message)
 
         prediction = trie.predict([word], int(amount))
-        print(prediction)
         collected = pars.collect_from_list(prediction)
 
         if len(prediction) == 1:
