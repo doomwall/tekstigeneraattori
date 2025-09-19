@@ -31,7 +31,7 @@ class Trie:
             if thing not in current.children:
                 current.children[thing] = Node()
                 current.children[thing].is_terminal |= terminal
-            
+
             current = current.children[thing]
             current.frequency += 1
 
@@ -80,8 +80,11 @@ class Trie:
             result_find = self.find(used_arg)
 
             # arvotaan sana joukosta sanoja
-            value = random.choices([i for i in range(0, len(result_find[0]))], weights=result_find[1], k=1)[0]
-            
+            value = random.choices(
+                list(range(0, len(result_find[0]))),
+                weights=result_find[1],
+                k=1)[0]
+
             result.append(result_find[0][value])
             booleans.append(result_find[2][value])
             amount -= 1

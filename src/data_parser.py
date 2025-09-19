@@ -1,5 +1,6 @@
 from pathlib import Path
-import re, random
+import re
+import random
 
 # Tämä luokka pilkkoo datan hyväksyttävään muotoon Trie puuta varten
 
