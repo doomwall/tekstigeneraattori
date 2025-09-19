@@ -35,3 +35,10 @@ class TestDataParser(unittest.TestCase):
 
         self.assertEqual(x, ['t', 'e', 's', 't.'])
         self.assertEqual(y, 'test.')
+
+    def test_parser_special_chars(self):
+        new_data = "this. has_! some0 _weird¤ symbols& right?"
+
+        x = self.d.parser(new_data)
+
+        self.assertEqual(x, ['this.', 'has', 'some', 'weird', 'symbols', 'right?'])

@@ -9,7 +9,7 @@ class DataParser:
 
     def parser(self, data):
         # regex, joka erottelee tekstin sanoiksi ja palauttaa listan
-        return re.findall(r'\w+[;.,!]?', data)
+        return re.findall(r'[^\W\d_]+[;.,!?]?', data, re.UNICODE)
 
     def word_to_chars(self, data):
         # pilkkoo sanan kirjaimiksi ja lisää viimeiseen kirjaimeen pisteen = isTerminal = True
