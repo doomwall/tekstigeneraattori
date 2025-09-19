@@ -6,4 +6,5 @@ Testaus tehdään pääosin muutamilla arvoilla etukäteen annetuilla arvoilla. 
 
 ## Coverage-report
 
-![alt text](pics/coverage19092025.png "Test coverage")
+![alt text](pics/coverage19092025.PNG "Test coverage")
+
