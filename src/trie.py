@@ -78,8 +78,6 @@ class Trie:
         while True:
             used_arg = result[-(self.n - 1):] if self.n > 1 else []
             result_find = self.find(used_arg)
-            #print(f"RESULT: {result}")
-            print(f"RESULT FIND: {result_find}")
 
             # arvotaan sana joukosta sanoja
             value = random.choices([i for i in range(0, len(result_find[0]))], weights=result_find[1], k=1)[0]
@@ -97,27 +95,3 @@ class Trie:
                 break
 
         return (result, booleans)
-    
-if __name__ == "__main__":
-    trie = Trie(n=3)
-    trie.insert_helper(["minä;", "menen", "kouluun", "nyt", "heti"])
-    trie.insert_helper(["minä", "menen.", "kotiin", "huomenna", "ehkä"])
-    trie.insert_helper(["ehkä", "menen", "sittenkin;", "huomenna", "kotiin"])
-
-    #trie.insert_helper(["a", "i", "e.", "e", "o"])
-    #trie.insert_helper(["a", "u", "e", "o", "o."])
-    #trie.insert_helper(["a", "e"])
-    #trie.insert_helper(["a", "i"])
-    #trie.insert_helper(["a", "e"])
-    #print(trie.root)
-    #print(trie.root.children["e"])
-
-    #prediction = trie.predict(["a"], 3)
-    #print(prediction)
-
-    x = trie.predict(["minä"], 10)
-
-    print(x)
-    
-    #print(trie.find(["menen"]))
-    
