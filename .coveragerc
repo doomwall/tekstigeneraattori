@@ -6,3 +6,4 @@ omit =
     src/ui/*
     src/index.py
     src/main.py
+    src/animation.py
