@@ -21,7 +21,7 @@ def main():
     while True:
         decision = inquirer.select(
             message="Choose the material: ",
-            choices=["Kalevala", "Dog names", "Exit"],
+            choices=["Books", "Kalevala", "Dog names", "Exit"],
         ).execute()
 
         if decision == "Kalevala":
@@ -29,6 +29,9 @@ def main():
 
         if decision == "Dog names":
             dogs()
+
+        if decision == "Books":
+            books()
 
         if decision == "Exit":
             break
@@ -54,6 +57,36 @@ def kalevala():
     source = pars.open_file("kalevala.txt")
     feed = pars.parser(source)
     trie.insert_helper(feed)
+
+    how_many_message = "How many words shold I generate atleast?"
+
+    while True:
+        word = inquirer.text(message="Give me a starting word (empty will close):").execute()
+        if word == "":
+            break
+
+        amount = how_many(how_many_message)
+
+        prediction = trie.predict([word], int(amount))
+        collected = pars.collect_from_list(prediction)
+
+        if len(prediction) == 1:
+            print("This word was not found in the text")
+        else:
+            anim.one_by_one(collected)
+
+def books():
+    # aloittaa ohjelman englannin kielisellä Kalevalalla
+
+    pars = DataParser()
+    anim = AnimateText()
+
+    trie = markov_order()
+
+    for i in ["alice.txt", "frankenstein.txt", "moby_dick.txt", "pride.txt"]:
+        source = pars.open_file(i)
+        feed = pars.parser(source)
+        trie.insert_helper(feed)
 
     how_many_message = "How many words shold I generate atleast?"
 

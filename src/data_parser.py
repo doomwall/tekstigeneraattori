@@ -8,14 +8,17 @@ class DataParser:
         self.dirname = Path(__file__).resolve().parent.parent
 
     def parser(self, data):
+        # regex, joka erottelee tekstin sanoiksi ja palauttaa listan
         return re.findall(r'\w+[;.,!]?', data)
 
     def word_to_chars(self, data):
+        # pilkkoo sanan kirjaimiksi ja lisää viimeiseen kirjaimeen pisteen = isTerminal = True
         new_data = list(data)
         new_data[-1] = new_data[-1] + "."
         return new_data
 
     def open_file(self, filename):
+        # avaa tiedoston ja lukee sisällön
         path = str(self.dirname) + "/material/" + filename
         with open(path, encoding="utf-8") as f:
             return f.read()
@@ -36,7 +39,7 @@ class DataParser:
             else:
                 result += thing_list[i]
 
-            if booleans[i] is True and random.random() < 0.5:
+            if booleans[i] is True and random.random() < 0.6:
                 result += "."
                 capital = True
             result += " "
@@ -46,11 +49,3 @@ class DataParser:
 
     def collect_letters_from_list(self, data):
         return "".join(data)
-
-
-
-if __name__ == "__main__":
-    d = DataParser()
-    x = d.open_file("dogs.txt")
-    y = d.parser(x)
-    print(y)
