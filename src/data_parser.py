@@ -7,6 +7,7 @@ import random
 class DataParser:
     def __init__(self):
         self.dirname = Path(__file__).resolve().parent.parent
+        self.probability = 0.6
 
     def parser(self, data):
         # regex, joka erottelee tekstin sanoiksi ja palauttaa listan
@@ -40,7 +41,7 @@ class DataParser:
             else:
                 result += thing_list[i]
 
-            if booleans[i] is True and random.random() < 0.6:
+            if booleans[i] is True and random.random() < self.probability:
                 result += "."
                 capital = True
             result += " "

@@ -76,7 +76,7 @@ def kalevala():
             anim.one_by_one(collected)
 
 def books():
-    # aloittaa ohjelman englannin kielisellä Kalevalalla
+    # aloittaa ohjelman neljällä eri kirjalla
 
     pars = DataParser()
     anim = AnimateText()
@@ -127,7 +127,6 @@ def dogs():
         amount = how_many(how_many_message)
 
         prediction = trie.predict([letter], int(amount))
-        print(f"PREDICTION {prediction}")
         collected = pars.collect_letters_from_list(prediction[0])
 
         if len(prediction) == 1:
