@@ -1,7 +1,12 @@
 # tekstigeneraattori
 Aineopintojen harjoitustyö: Algoritmit ja tekoäly - Tekstigeneraattori
 
-Käyttää Trie-tietorakennetta ja Markovin ketjua generoidakseen tulevia sanoja tai merkkejä annetulle inputille. Ohjelmassa on kolme eri lähdemateriaalia. "Books" kouluttaa ohjelman kirjoilla Moby Dick, Liisa Ihmemaassa, Ylpeys ja ennakkoluulo ja Frankenstein. "Kalevala" kouluttaa ohjelman englannin kielisellä Kalevalalla. "Dog names" käyttää listaa koirien nimistä. Lähdemateriaalin valinnan jälkeen ohjelma kysyy käyttäjältä Markovin asteen (suosittelen käyttämään joko 3 tai 4) ja pyytää englanninkielisen sanan, josta sanoja lähdetään generoimaan. Koirien nimien kanssa käytetään yhtä kirjainta. 
+Käyttää Trie-tietorakennetta ja Markovin ketjua generoidakseen tulevia sanoja tai merkkejä annetulle inputille. Ohjelmassa on kolme eri lähdemateriaalia:
+- "Books" kouluttaa ohjelman kirjoilla Moby Dick, Liisa Ihmemaassa, Ylpeys ja ennakkoluulo ja Frankenstein
+- "Kalevala" kouluttaa ohjelman englannin kielisellä Kalevalalla
+- "Dog names" käyttää listaa koirien nimistä
+
+Lähdemateriaalin valinnan jälkeen ohjelma kysyy käyttäjältä Markovin asteen (suosittelen käyttämään joko 3 tai 4) ja pyytää englanninkielisen sanan, josta sanoja lähdetään generoimaan. Koirien nimien kanssa käytetään yhtä kirjainta. 
 
 # Asentaminen
 
