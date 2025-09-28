@@ -16,7 +16,15 @@ def main():
     # pääohjelma
 
     print(ASCII_ART)
-    print("Welcome to tekstigeneraattori")
+    print("\n Welcome to tekstigeneraattori")
+    print("""
+    This program uses text data sourced from Project Gutenberg (https://www.gutenberg.org),
+    a digital library offering public domain literature freely available for use.
+
+    Note: While Project Gutenberg provides public domain content, users are encouraged to review
+    its terms of use at: https://www.gutenberg.org/policy/license.html
+    """)
+
 
     while True:
         decision = inquirer.select(
