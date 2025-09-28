@@ -8,6 +8,8 @@ Käyttää Trie-tietorakennetta ja Markovin ketjua generoidakseen tulevia sanoja
 
 Lähdemateriaalin valinnan jälkeen ohjelma kysyy käyttäjältä Markovin asteen (suosittelen käyttämään joko 3 tai 4) ja pyytää englanninkielisen sanan, josta sanoja lähdetään generoimaan. Koirien nimien kanssa käytetään yhtä kirjainta. Isompien Markovin asteiden käyttäminen voi hidastaa ohjelman toimintaa huomattavasti, eikä se ole muutenkaan suositeltavaa. Mitä isompi Markovin aste on, niin sitä todennäköisemmin ohjelma alkaa vain toistamaan lähdemateriaalia sana sanalta. Siksi on järkevämpää käyttää asteita 3 tai 4. 
 
+Tämä projekti käyttää tekstiaineistoa Project Gutenbergistä (https://www.gutenberg.org), joka tarjoaa julkisen domainin kirjallisuutta.
+
 # Asentaminen
 
 Lataa ohjelma laitteellesi käyttämällä toimintoa ja siirry ohjelman kansioon: 
