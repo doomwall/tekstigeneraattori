@@ -14,3 +14,8 @@ Trie-tietorakenne itsessään on aikavaativuudeltaan O(n) kaikilla keskeisillä 
 Sanojen ennakoiminen trie-puusta on myös O(n x m), missä n on generoitavien sanojen määrä ja m on Markovin aste - 1. Arvojen ennakoimisessa käytetään m verran arvoja seuraavan arvon löytämiseen. 
 
 Hakutoiminto itsessään käy läpi m sanaa trie-puussa, joten sen aikavaativuus on O(m).
+
+
+## Puutteet ja parannusehdotukset
+
+Tällä hetkellä ohjelman käyttöön saattaa kulua pitkä aika mikäli valitaan sana, jota ei löydy lähdemateriaalista. Ohjelma silloin arpoo jonkin sanan käytettäväksi seuraavana sanana. Kun käytössä on Markovin aste, joka on isompi kuin yksi, niin ennakoimiseen käytetään useampia sanoja. Kun joudutaan arpomaan sanoja, niin edelliset sanat eivät liity toisiinsa, joten ohjelma ei löydä trie-puusta sanojen mukaisia ketjuja. Tästä syystä ohjelma joutuu käymään trie-rakenteen useita kertoja läpi löytämättä toimivia ketjuja. Tämä hidastaa ohjelman toimintaa huomattavasti. 
