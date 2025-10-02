@@ -52,21 +52,22 @@ class Trie:
         current = self.root
         for i in data:
             if i not in current.children:
-                fallback = random.choice(list(self.root.children.items()))
-                return ([fallback[0]], [fallback[1].frequency], [fallback[1].is_terminal])
+                return None
             current = current.children[i]
 
         if not current.children:
             # jos solmulla ei ole enempää lapsia, niin palautetaan random sana
-            fallback = random.choice(list(self.root.children.items()))
-            return ([fallback[0]], [fallback[1].frequency], [fallback[1].is_terminal])
+            return None
 
         for i, p in current.children.items():
             things.append(i)
             freqs.append(p.frequency)
             is_terminals.append(p.is_terminal)
         return (things, freqs, is_terminals)
-
+    
+    def generate_random(self):
+        fallback = random.choice(list(self.root.children.items()))
+        return ([fallback[0]], [fallback[1].frequency], [fallback[1].is_terminal])
 
     def predict(self, thing, amount):
         # etsii solmuista seuraavia sanoja, joita käyttää lauseessa
@@ -84,7 +85,14 @@ class Trie:
             used_arg = result[-(self.n - 1):] if self.n > 1 else []
             result_find = self.find(used_arg)
 
-            # arvotaan sana joukosta sanoja
+            # jos kysyttyä arvoa ei löydy trie:stä, aloitetaan generointi random arvolla
+            if result_find == None:
+                random_choice = self.generate_random()
+                result = random_choice[0]
+                booleans = random_choice[2]
+                continue
+
+            # arvotaan sana joukosta sanoja käyttäen painotusta frekvenssille
             value = random.choices(
                 list(range(0, len(result_find[0]))),
                 weights=result_find[1],

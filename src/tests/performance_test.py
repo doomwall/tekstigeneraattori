@@ -10,6 +10,7 @@ class TestTrie(unittest.TestCase):
         self.t = Trie(4)
         self.d = DataParser()
 
+    # testataan toimiiko sekä trie-puun opettaminen että siitä ennustaminen tarvittavan nopeasti
     def test_learning_and_prediction_performance(self):
         random.seed(1)
 
