@@ -56,7 +56,7 @@ class Trie:
             current = current.children[i]
 
         if not current.children:
-            # jos solmulla ei ole enempää lapsia, niin palautetaan random sana
+            # jos solmulla ei ole lapsia, palautetaan tyhjä
             return None
 
         for i, p in current.children.items():

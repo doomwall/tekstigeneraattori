@@ -69,6 +69,8 @@ def kalevala():
     how_many_message = "How many words shold I generate atleast?"
 
     while True:
+        print("Choose the word you want to start with.")
+        print("If the word is not found from material, a random word is used instead")
         word = inquirer.text(message="Give me a starting word (empty will close):").execute()
         if word == "":
             break
@@ -99,6 +101,8 @@ def books():
     how_many_message = "How many words shold I generate atleast?"
 
     while True:
+        print("Choose the word you want to start with.")
+        print("If the word is not found from material, a random word is used instead")
         word = inquirer.text(message="Give me a starting word (empty will close):").execute()
         if word == "":
             break
@@ -128,7 +132,8 @@ def dogs():
         trie.insert_helper(char)
 
     while True:
-        letter = inquirer.text(message="Give me a letter (empty will close):").execute()
+        print("Choose the letter you want to start with.")
+        letter = inquirer.text(message="Give me a starting word (empty will close):").execute()
         if letter == "":
             break
 
