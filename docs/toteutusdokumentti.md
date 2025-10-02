@@ -16,3 +16,15 @@ Trie-tietorakenne itsessään on aikavaativuudeltaan O(n) kaikilla keskeisillä 
 Sanojen ennakoiminen trie-puusta on myös O(n x m), missä n on generoitavien sanojen määrä ja m on Markovin aste - 1. Arvojen ennakoimisessa käytetään m verran edellisiä arvoja seuraavan arvon löytämiseen. 
 
 Hakutoiminto itsessään käy läpi m sanaa trie-puussa, joten sen aikavaativuus on O(m).
+
+
+## Laajojen kielimallien käyttö
+
+Ohjelman ideoimiseen on käytetty apuna ChatGPT:tä. Käytin tekoälyä trie-tietorakenteen ja Markovin ketjun ymmärtämiseen paremmin. Tekoälyä ei ole käytetty koodin kirjoittamiseen tai materiaalin tuottamiseen.
+
+
+## Lähteet
+
+* [Trie-tietorakenne - Wikipedia](https://en.wikipedia.org/wiki/Trie)  <br/>
+* [Markovin ketju - Wikipedia](https://en.wikipedia.org/wiki/Markov_chain)  <br/>
+* [N-grams and Markov Chains](https://www.decontextualize.com/teaching/rwet/n-grams-and-markov-chains/)  <br/>
