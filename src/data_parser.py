@@ -19,11 +19,14 @@ class DataParser:
         new_data[-1] = new_data[-1] + "."
         return new_data
 
-    def open_file(self, filename):
+    def open_file(self, filename, start=0, finish=-1):
         # avaa tiedoston ja lukee sisällön
         path = str(self.dirname) + "/material/" + filename
         with open(path, encoding="utf-8") as f:
-            return f.read()
+            lines = f.readlines()
+
+            content = ''.join(lines[start:finish])
+            return content 
 
     def collect_from_list(self, data):
         # muuntaa listan sanoja ja booleans tulostettavaan muotoon

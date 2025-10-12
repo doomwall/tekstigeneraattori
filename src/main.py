@@ -74,7 +74,7 @@ def kalevala(print_tree):
     if not trie:
         return
 
-    source = pars.open_file("kalevala.txt")
+    source = pars.open_file("kalevala.txt", 1127, 13412)
     feed = pars.parser(source)
     trie.insert_helper(feed)
 
@@ -86,6 +86,8 @@ def kalevala(print_tree):
         word = inquirer.text(message="Give me a starting word (empty will close):").execute()
         if word == "":
             break
+
+        word = word.lower()
 
         amount = how_many(how_many_message)
 
@@ -109,10 +111,21 @@ def books(print_tree):
     if not trie:
         return
 
-    for i in ["alice.txt", "frankenstein.txt", "moby_dick.txt", "pride.txt"]:
-        source = pars.open_file(i)
-        feed = pars.parser(source)
-        trie.insert_helper(feed)
+    source = pars.open_file("alice.txt", 54, 3404)
+    feed = pars.parser(source)
+    trie.insert_helper(feed)
+
+    source = pars.open_file("frankenstein.txt", 75, 7383)
+    feed = pars.parser(source)
+    trie.insert_helper(feed)
+
+    source = pars.open_file("moby_dick.txt", 841, 21956)
+    feed = pars.parser(source)
+    trie.insert_helper(feed)
+
+    source = pars.open_file("pride.txt", 91, 14541)
+    feed = pars.parser(source)
+    trie.insert_helper(feed)
 
     how_many_message = "How many words shold I generate atleast?"
 
@@ -122,6 +135,8 @@ def books(print_tree):
         word = inquirer.text(message="Give me a starting word (empty will close):").execute()
         if word == "":
             break
+
+        word = word.lower()
 
         amount = how_many(how_many_message)
 
@@ -157,6 +172,8 @@ def dogs(print_tree):
         if letter == "":
             break
 
+        letter = letter.lower()
+
         amount = how_many(how_many_message)
 
         prediction = trie.predict([letter], int(amount))
@@ -175,6 +192,9 @@ def how_many(message):
     while True:
         try:
             amount = inquirer.number(message=message).execute()
+            if int(amount) < 0:
+                print("Negative numbers are not allowed!")
+                continue
             return int(amount)
         except ValueError:
             print("Only numbers are allowed.")

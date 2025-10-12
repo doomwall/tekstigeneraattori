@@ -72,7 +72,7 @@ class Trie:
             # jos arvoa ei löydy käsiteltävän solmun lehdistä, sille lisätään sen niminen solmu lapseksi
             if thing not in current.children:
                 current.children[thing] = Node()
-                current.children[thing].is_terminal |= terminal
+            current.children[thing].is_terminal |= terminal
 
             # vaihdetaan käsiteltäväksi solmuksi tämän hetkinen arvo
             current = current.children[thing]
