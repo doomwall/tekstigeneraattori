@@ -51,3 +51,4 @@ class DataParser:
 
     def collect_letters_from_list(self, data):
         return "".join(data)
+

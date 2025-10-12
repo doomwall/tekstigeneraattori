@@ -17,6 +17,15 @@ class TestTrie(unittest.TestCase):
         self.assertEqual(str(self.t.root), "Node(freq=0, children=['minä', 'menen', 'kouluun', 'kotiin', 'ostan', 'muutaman'], is_terminal=False)")
         self.assertEqual(str(self.t.root.children["ostan"]), "Node(freq=1, children=['muutaman'], is_terminal=False)")
 
+    def test_trie_structure_amount_of_nodes(self):
+        self.assertEqual(str(self.t)[-1], "9")
+
+        self.t.insert_helper(["ostan", "muutaman", "jäätelön"])
+        self.assertEqual(str(self.t)[-2:], "13")
+
+        self.t.insert_helper(["ostan", "muutaman", "karkin"])
+        self.assertEqual(str(self.t)[-2:], "14")
+
     # testataan että trie:stä etsiminen toimii
     def test_trie_find(self):
         x = self.t.find(["menen"])
@@ -51,4 +60,3 @@ class TestTrie(unittest.TestCase):
         y = self.t.predict(["minä"], 1)
 
         self.assertEqual(y[0], ['minä', 'menen', 'kouluun', 'nyt'])
-        

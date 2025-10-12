@@ -19,6 +19,46 @@ class Trie:
         self.n = n  # Markovin asteen määrä
         self.endings = [".", ",", "!", ";", "?"]
 
+    # kerää puusta kaikki tietyn noden lehdet ja kokoaa ne printattavaan muotoon
+    def collect_tree(self, starting_node, starting_depth = -1, number_of_children = 0):
+        how_many = number_of_children
+        depth = starting_depth + 1
+        print_out = ""
+
+        for child in starting_node.children:
+            if depth > 1:
+                print_out += (f"\t" * (depth-1))
+            if depth > 0:
+                print_out += ("  \u255a\u2550\u2550\u2550\u2550\u2550 ")
+            print_out += f"{child} \n"
+
+            how_many += 1
+
+            if starting_node.children[child].children:
+                a = self.collect_tree(starting_node.children[child], depth)
+                print_out += a[0]
+                how_many += a[1]
+
+        return (print_out, how_many)
+    
+    def collect_children(self, starting_node):
+        result = []
+
+        for child_name, child_node in starting_node.children.items():
+            if child_node.children:
+                for subpath in self.collect_children(child_node):
+                    result.append([child_name] + subpath)
+            else:
+                result.append([child_name])
+
+        return result
+
+    # tulostaa koko puun rakenteen
+    def __str__(self):
+        whole_tree = self.collect_tree(self.root)
+        return (f"{whole_tree[0]}"
+               f"How many nodes: {whole_tree[1]}")
+
     def insert(self, data: str):
         # funktio arvojen lisäämiselle Trie-puuhun
         current = self.root
@@ -111,3 +151,19 @@ class Trie:
                 break
 
         return (result, booleans)
+
+
+if __name__ == "__main__":
+    a = Trie(3)
+    a.insert_helper(["olipa", "kerran", "kaunis"])
+    a.insert_helper(["olipa", "kerran", "kummallinen"])
+
+    print(a)
+
+    t = Trie(3)
+    t.insert_helper(["olipa", "kerran", "kaunis", "päivä"])
+    t.insert_helper(["olipa", "kerran", "kummallinen", "ilma"])
+    t.insert_helper(["lehdet", "putoavat", "puista", "huomenna"])
+    t.insert_helper(["juostaan", "ympäri", "pihamaan"])
+
+    print(t.collect_children(t.root))

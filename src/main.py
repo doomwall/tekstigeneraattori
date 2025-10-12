@@ -25,21 +25,29 @@ def main():
     its terms of use at: https://www.gutenberg.org/policy/license.html
     """)
 
+    print_tree = False
 
     while True:
         decision = inquirer.select(
             message="Choose the material: ",
-            choices=["Books", "Kalevala", "Dog names", "Exit"],
+            choices=["Books", "Kalevala", "Dog names", "Toggle tree print", "Exit"],
         ).execute()
 
         if decision == "Kalevala":
-            kalevala()
+            kalevala(print_tree)
 
         if decision == "Dog names":
-            dogs()
+            dogs(print_tree)
 
         if decision == "Books":
-            books()
+            books(print_tree)
+
+        if decision == "Toggle tree print":
+            print_tree = not print_tree
+
+            print(f"Tree print set to {print_tree}")
+            if print_tree:
+                print("Warning! This will print out the whole tree, which means there will be many rows of text.")
 
         if decision == "Exit":
             break
@@ -48,19 +56,23 @@ def markov_order():
     # kysyy käyttäjältä Markovin ketjun asteen
     while True:
         order = inquirer.text(message="Give me Markov order: ").execute()
+        if not order:
+            return None
         try:
             trie = Trie(n=int(order))
             return trie
         except ValueError:
             print("Please give a number")
 
-def kalevala():
+def kalevala(print_tree):
     # aloittaa ohjelman englannin kielisellä Kalevalalla
 
     pars = DataParser()
     anim = AnimateText()
 
     trie = markov_order()
+    if not trie:
+        return
 
     source = pars.open_file("kalevala.txt")
     feed = pars.parser(source)
@@ -83,15 +95,19 @@ def kalevala():
         if len(prediction) == 1:
             print("This word was not found in the text")
         else:
+            if print_tree:
+                print(trie)
             anim.one_by_one(collected)
 
-def books():
+def books(print_tree):
     # aloittaa ohjelman neljällä eri kirjalla
 
     pars = DataParser()
     anim = AnimateText()
 
     trie = markov_order()
+    if not trie:
+        return
 
     for i in ["alice.txt", "frankenstein.txt", "moby_dick.txt", "pride.txt"]:
         source = pars.open_file(i)
@@ -115,14 +131,18 @@ def books():
         if len(prediction) == 1:
             print("This word was not found in the text")
         else:
+            if print_tree:
+                print(trie)
             anim.one_by_one(collected)
 
-def dogs():
+def dogs(print_tree):
     # aloittaa ohjelman koirien nimillä
 
     pars = DataParser()
 
     trie = markov_order()
+    if not trie:
+        return
     how_many_message = "How many letters atleast should the name have:"
 
     source = pars.open_file("dogs.txt")
@@ -145,6 +165,8 @@ def dogs():
         if len(prediction) == 1:
             print("This letter was not found in the text")
         else:
+            if print_tree:
+                print(trie)
             print(collected)
             print("")
 
