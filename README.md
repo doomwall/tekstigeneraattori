@@ -12,6 +12,8 @@ Tämä projekti käyttää tekstiaineistoa Project Gutenbergistä (https://www.g
 
 Käyttöehdot ja lisätiedot: [Project Gutenberg License](https://www.gutenberg.org/policy/license.html)
 
+Ohjelma hyödyntää aineistoa, joka on peräisin [NYC Open Data](https://opendata.cityofnewyork.us/) -palvelusta (City of New York).
+
 # Asentaminen
 
 Lataa ohjelma laitteellesi käyttämällä toimintoa ja siirry ohjelman kansioon: 
