@@ -41,6 +41,7 @@ class Trie:
 
         return (print_out, how_many)
     
+    # kerää kaikki tietyn noden lehdet listaksi
     def collect_children(self, starting_node):
         result = []
 
@@ -59,8 +60,9 @@ class Trie:
         return (f"{whole_tree[0]}"
                f"How many nodes: {whole_tree[1]}")
 
+
+    # funktio arvojen lisäämiselle Trie-puuhun
     def insert(self, data: str):
-        # funktio arvojen lisäämiselle Trie-puuhun
         current = self.root
         for i in data:
             thing = i.lower()
@@ -85,7 +87,7 @@ class Trie:
             self.insert(ngram)
 
     def find(self, data):
-        # etsii Trie puusta solmun ja palauttaa sen lapset ja niiden yleisyyden
+        # etsii Trie puusta solmun ja palauttaa sen lehdet, frekvenssin ja onko se lauseen/sanan päätös
         things = []
         freqs = []
         is_terminals = []
@@ -105,12 +107,13 @@ class Trie:
             is_terminals.append(p.is_terminal)
         return (things, freqs, is_terminals)
     
+    # palauttaa random vaihtoehdon puun arvoista
     def generate_random(self):
         fallback = random.choice(list(self.root.children.items()))
         return ([fallback[0]], [fallback[1].frequency], [fallback[1].is_terminal])
 
     def predict(self, thing, amount):
-        # etsii solmuista seuraavia sanoja, joita käyttää lauseessa
+        # etsii solmuista seuraavia arvoja, joita käyttää lopputuloksessa
         # thing = syötettävä arvo, millä etsitään
         # amount = montako sanaa/merkkiä tuotetaan
 
@@ -151,19 +154,3 @@ class Trie:
                 break
 
         return (result, booleans)
-
-
-if __name__ == "__main__":
-    a = Trie(3)
-    a.insert_helper(["olipa", "kerran", "kaunis"])
-    a.insert_helper(["olipa", "kerran", "kummallinen"])
-
-    print(a)
-
-    t = Trie(3)
-    t.insert_helper(["olipa", "kerran", "kaunis", "päivä"])
-    t.insert_helper(["olipa", "kerran", "kummallinen", "ilma"])
-    t.insert_helper(["lehdet", "putoavat", "puista", "huomenna"])
-    t.insert_helper(["juostaan", "ympäri", "pihamaan"])
-
-    print(t.collect_children(t.root))

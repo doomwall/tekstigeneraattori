@@ -16,7 +16,7 @@ Ohjelma hyödyntää aineistoa, joka on peräisin [NYC Open Data](https://openda
 
 # Asentaminen
 
-Lataa ohjelma laitteellesi käyttämällä toimintoa ja siirry ohjelman kansioon: 
+Lataa ohjelma laitteellesi käyttämällä alla olevaa toimintoa ja siirry ohjelman kansioon: 
 ```
 git clone git@github.com:doomwall/tekstigeneraattori.git tekstigeneraattori
 cd tekstigeneraattori

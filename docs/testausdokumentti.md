@@ -2,11 +2,11 @@
 
 Ohjelman pääominaisuudet ovat Trie-tietorakenteen ja Markovin ketjun toteutuksen ympärillä. Siksi testit ovat rakennettu testaamaan trie-rakennetta ja sen toimivuutta. Tämän lisäksi tiedosto 'data_parser.py' käy läpi trie-puulle syötettävää materiaalia, joten tiedon oikeellisuutta varten on luotu muutamia testejä. Testit tällä hetkellä alustaa trie-puun ja syöttää sinne muutamia aloitusarvoja. Sen jälkeen testataan erilaisia funktioita, jotka etsivät puusta sanoja ja niiden frekvenssejä. Sanojen ennustaminen perustuu jollain tasolla sattumanvaraisiin tilanteisiin, niin osa testeistä on alustettu antamalla kirjastolle 'random' toiminnolle 'seed' oma arvo.  
 
-Testaus tehdään pääosin muutamilla etukäteen annetuilla arvoilla. Esimerkiksi trie-puu saa listan erilaisia sanoja. Osa sanoista ovat samoja, jotta voidaan testata frekvenssejä. Koska arvot ovat aina samat ja random.seed:lle on annettu arvo, niin testit voidaan tällä hetkellä toistaa aina samoilla arvoilla. Testataan myös, että trie-puusta löytyvät n-grammit löytyvät sellaisinaan myös lähdemateriaalista
+Testaus tehdään pääosin muutamilla etukäteen annetuilla arvoilla. Esimerkiksi trie-puu saa listan erilaisia sanoja. Osa sanoista ovat samoja, jotta voidaan testata frekvenssejä. Koska arvot ovat aina samat ja random.seed:lle on annettu arvo, niin testit voidaan tällä hetkellä toistaa aina samoilla arvoilla. Testataan myös, että trie-puusta löytyvät n-grammit löytyvät sellaisinaan myös lähdemateriaalista.
 
-Lisäksi tehty suorituskykytesti, joka mittaa trie-rakenteen ja ennakoimisen toimivuutta. Trie tietorakenteelle syötetään englannin kielinen Kalevala Markovin asteella kolme, ja siitä ennakoidaan 100 000 sanaa eteenpäin. Molempien pitäisi toimia alle viidessä sekunnissa. 
+Lisäksi tehty suorituskykytesti, joka mittaa trie-rakenteen ja ennakoimisen toimivuutta. Trie tietorakenteelle syötetään englanninkielinen Kalevala Markovin asteella kolme, ja siitä ennakoidaan 100 000 sanaa eteenpäin. Molempien pitäisi toimia alle viidessä sekunnissa. 
 
 ## Coverage-report
 
-![alt text](pics/coverage19092025.PNG "Test coverage")
+![alt text](pics/coverage19102025.PNG "Test coverage")
 
