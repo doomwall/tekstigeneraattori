@@ -47,3 +47,11 @@ class TestDataParser(unittest.TestCase):
         x = self.d.parser(new_data)
 
         self.assertEqual(x, ['this.', 'has', 'some', 'weird', 'symbols', 'right?'])
+
+    # testataan clean_text_to_words funktion toiminto
+    def test_clean_text_to_words(self):
+        new_data = "this. has_! some _weird¤ symbols& right?"
+
+        x = self.d.clean_text_to_words(new_data)
+
+        self.assertEqual(x, "this has some weird symbols right")

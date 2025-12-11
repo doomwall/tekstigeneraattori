@@ -112,7 +112,7 @@ class Trie:
         fallback = random.choice(list(self.root.children.items()))
         return ([fallback[0]], [fallback[1].frequency], [fallback[1].is_terminal])
 
-    def predict(self, thing, amount):
+    def predict(self, thing, amount, find_func=None, rand_func=None):
         # etsii solmuista seuraavia arvoja, joita käyttää lopputuloksessa
         # thing = syötettävä arvo, millä etsitään
         # amount = montako sanaa/merkkiä tuotetaan
@@ -121,22 +121,30 @@ class Trie:
         booleans = [False]
         amount = amount - 1
 
+        # näillä tarkistetaan kutsutaanko funktiota injektioilla
+        if find_func is None:
+            find_func = self.find
+
+        if rand_func is None:
+            rand_func = random.choices
+
         # annetaan ohjelmalle maksimi määrä sanoille, jos se ei löydä sanaa joka lopettaisi lauseen. 
         max_attempts = amount + 10
 
-        while True:
+        while True and max_attempts > 0:
             used_arg = result[-(self.n - 1):] if self.n > 1 else []
-            result_find = self.find(used_arg)
+            result_find = find_func(used_arg)
 
             # jos kysyttyä arvoa ei löydy trie:stä, aloitetaan generointi random arvolla
-            if result_find == None:
+            if result_find == None or result_find[0] == []:
                 random_choice = self.generate_random()
                 result = random_choice[0]
                 booleans = random_choice[2]
+                max_attempts -= 1
                 continue
 
             # arvotaan sana joukosta sanoja käyttäen painotusta frekvenssille
-            value = random.choices(
+            value = rand_func(
                 list(range(0, len(result_find[0]))),
                 weights=result_find[1],
                 k=1)[0]
@@ -154,3 +162,4 @@ class Trie:
                 break
 
         return (result, booleans)
+    

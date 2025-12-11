@@ -54,4 +54,13 @@ class DataParser:
 
     def collect_letters_from_list(self, data):
         return "".join(data)
+    
+    # muuttaa lähdemateriaalin tekstiksi ilman rivivälejä ja erikoismerkkejä
+    def clean_text_to_words(self, text):
+        text = text.replace("\n", " ")
+        text = re.sub(r"[^a-zA-ZåäöÅÄÖ0-9 ]+", "", text)
+        text = re.sub(r"\s+", " ", text)
+        words = text.strip().lower()
+
+        return words
 

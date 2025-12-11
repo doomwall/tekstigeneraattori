@@ -60,7 +60,8 @@ def markov_order():
         if not order:
             return None
         try:
-            trie = Trie(n=int(order))
+            order = int(order)+1
+            trie = Trie(n=order)
             return trie
         except ValueError:
             print("Please give a number")
@@ -203,3 +204,4 @@ def how_many(message):
 
 if __name__ == "__main__":
     main()
+        
